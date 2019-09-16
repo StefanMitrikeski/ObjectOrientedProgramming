@@ -18,6 +18,7 @@ function theLivingDead() {
 
             var combatant = this.humanArmy[i];
             var enemy = this.zombieArmy[i]
+            console.log(enemy)
             if (combatant.isAlive && enemy.isAlive) {
                 aliveCombatants++
                 aliveEnemy++
@@ -35,34 +36,34 @@ function theLivingDead() {
         return true;
     }
 
-    // this.processTurn = function () {
-    //     var victim = this.humanArmy[getRandom(0, this.humanArmy.length)];
-    //     var zombie = this.zombieArmy[getRandom(0, this.zombieArmy.length)];
-    //     if (victim.isAlive) {
-    //         zombie.attack(victim)
-    //     } else {
-    //         return this.processTurn();
-    //     }
-    //     for (let i = 0; i < this.humanArmy.length; i++) {
-    //         var victim = this.humanArmy[i];
-    //         if (victim.isAlive) {
-    //             victim.attack(zombie);
-    //         }
-    //     }
-
-    // }
-
-    this.processTurn = function(){
+    this.processTurn = function () {
         var victim = this.humanArmy[getRandom(0, this.humanArmy.length)];
         var zombie = this.zombieArmy[getRandom(0, this.zombieArmy.length)];
-        if (zombie.isAlive && victim.isAlive) {
+        if (victim.isAlive) {
             zombie.attack(victim)
         } else {
-            
+            return this.processTurn();
         }
-        // console.log(zombie)
-        // console.log(victim)
+        for (let i = 0; i < this.humanArmy.length; i++) {
+            var victim = this.humanArmy[i];
+            if (victim.isAlive) {
+                victim.attack(zombie);
+            }
+        }
+
     }
+
+    // this.processTurn = function(){
+    //     var victim = this.humanArmy[getRandom(0, this.humanArmy.length)];
+    //     var zombie = this.zombieArmy[getRandom(0, this.zombieArmy.length)];
+    //     if (zombie.isAlive && victim.isAlive) {
+    //         zombie.attack(victim)
+    //     } else {
+            
+    //     }
+    //     // console.log(zombie)
+    //     // console.log(victim)
+    // }
 
     this.generator = function () {
         for (let i = 0; i <= getRandom(10, 20); i++) {

@@ -23,8 +23,14 @@ function theLivingDead() {
         var human = this.humans[getRandom(0, this.humans.length - 1)]
         var zombi = this.zombies[getRandom(0, this.zombies.length - 1)]
         if (human.isAlive) {
-          human.attack(this.zombies[getRandom(0, this.zombies.length - 1)])
-          console.log("human atacked zombie");
+          if (calculatePercent(10)) {
+            human.instaKill(this.zombies[getRandom(0, this.zombies.length - 1)]);
+            console.log("the zombi has experienced the wrath of the human")
+          }else{
+            human.attack(this.zombies[getRandom(0, this.zombies.length - 1)])
+            console.log("human atacked zombie");
+          }
+          
         }
         if (zombi.isAlive) {
           zombi.attack(human);
